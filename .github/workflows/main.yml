@@ -11,16 +11,7 @@ jobs:
         uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      
-      - name: Store Snyk scan results in an artifact
-        run: |
-          mkdir -p scan-results
-          mv snyk-report.json scan-results/
         continue-on-error: true
-
-      - name: Upload Snyk scan results as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: snyk-scan-results
-          path: scan-results/
+      
+   
 
