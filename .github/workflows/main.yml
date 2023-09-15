@@ -12,6 +12,19 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         continue-on-error: true
-      
-   
+
+      # Add a step to store the Snyk scan report as an artifact
+      - name: Store Snyk Scan Report as Artifact
+        run: |
+          mkdir -p snyk-scan-report
+          cp -r .snyk snyk-scan-report
+        if: always()
+
+      # Upload the Snyk scan report as an artifact
+      - name: Upload Snyk Scan Report Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: snyk-scan-report
+          path: snyk-scan-report
+
 
